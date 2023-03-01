@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Bookmarks
+export NNN_BMS="d:$HOME/Downloads;l:$HOME/.local;c:$HOME/.config"
+
+# Colorscheme
+export NNN_COLORS="#7ca6d6e2"
+
+BLK="C1" CHR="E2" DIR="CB" EXE="2E" REG="00" HARDLINK="60" SYMLINK="33" MISSING="F7" ORPHAN="C6" FIFO="D6" SOCK="AB" OTHER="C4"
+export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
+
+# Start nnn with your preferred options
+nnn -rSAe "$@"
