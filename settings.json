@@ -1,0 +1,17 @@
+{
+    "cmake.configureOnOpen": true,
+    "workbench.iconTheme": "material-icon-theme",
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "vim.leader": ",",
+    "vim.useSystemClipboard": true,
+    "vim.vimrc.enable": true,
+    "vim.whichwrap": "b,s,<,>,h,l,[,]",
+    "vim.statusBarColorControl": true,
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#005f5f",
+        "statusBar.noFolderBackground": "#005f5f",
+        "statusBar.debuggingBackground": "#005f5f"
+    },
+}
