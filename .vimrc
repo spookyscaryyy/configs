@@ -5,9 +5,11 @@ set shiftwidth=4
 set expandtab
 set autoindent
 set smarttab
+set cc=80
 
 " File detection
 filetype plugin indent on
+au BufNewFile,BufRead *.tpp set filetype=cpp
 
 " Disable backup files
 set backupdir=.backup/,~/.backup/,/tmp//
@@ -61,7 +63,7 @@ endfun
 nnoremap <C-s> :w<CR>
 inoremap jj <esc>
 nnoremap <leader>w :call ClearExtraSpaces()<CR>
-nnoremap <leader>gd :ALEGoToDefinition
+nnoremap <leader>gd :ALEGoToDefinition<CR>
 map <leader>fc /\v^[<\|=>]{7}( .*\|$ )<CR>
 map <leader>tc :tabnew %<CR>
 map <leader>td :tabclose<CR>
@@ -96,14 +98,20 @@ if executable('ccls')
       \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
       \ })
 endif
-
+if executable('pylsp')
+      autocmd User lsp_setup call lsp#register_server({
+          \ 'name': 'pylsp',
+          \ 'cmd': {server_info->['pylsp']},
+          \ 'allowlist': ['python'],
+          \ })
+endif
 let g:ale_linters = {
     \   'cpp': ['vim-lsp', 'ccls'],
-    \   'py' : ['vim-lsp', 'pylsp-all']
+    \   'python': ['vim-lsp', 'flake8', 'jedils', 'pylint', 'pylsp'],
+    \   'java': ['vim-lsp']
     \ }
-
+let g:ale_linters_explicit = 1
 let g:ale_completion_enabled = 1
-set omnifunc=ale#completion#OmniFunc
 "let g:ale_linters_explicit = 1
 let g:ale_cpp_ccls_init_options = {
 \   'cache': {
@@ -131,6 +139,8 @@ Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax' 
 
 call plug#end()
 
@@ -139,6 +149,9 @@ colo gruvbox
 set bg=dark
 set termguicolors
 hi Normal guibg=NONE ctermbg=NONE
+
+
+set omnifunc=ale#completion#OmniFunc
 
 " ---------------------------------------------------------------------
 " Airline
@@ -159,12 +172,10 @@ let g:airline#extensions#tabline#show_close_button = 0 " remove 'X' at the end o
 let g:airline#extensions#tabline#tabs_label = ''       " can put text here like BUFFERS to denote buffers (I clear it so nothing is shown)
 let g:airline#extensions#tabline#buffers_label = ''    " can put text here like TABS to denote tabs (I clear it so nothing is shown)
 let g:airline#extensions#tabline#show_tab_nr = 0
-let g:airline#extensions#tabline#left_sep = "\uE0BC"
-let g:airline#extensions#tabline#left_alt__sep = "\uE0BD"
-let g:airline#extensions#tabline#right_sep = "\uE0BE"
-let g:airline#extensions#tabline#right_alt_sep = "\uE0BF"
 
 " Set icons "
 let g:airline_left_sep = "\uE0BC"
+let g:airline_left_alt_sep = "\uE0BD"
 let g:airline_right_sep = "\uE0BE"
+let g:airline_right_alt_sep = "\uEOBF"
 let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
