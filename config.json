@@ -1,0 +1,23 @@
+{
+  "segments": [
+    "virtual_env",
+    "username",
+    "hostname",
+    "ssh",
+    "cwd",
+    "git",
+    "hg",
+    "jobs",
+    "root"
+  ],
+
+  "theme": "/usr/lib/python3.10/site-packages/powerline_shell/themes/redtheme.py",
+
+  "patched": {
+        	"lock": "u'\uE0A2'",
+        	"network": "u'\uE0A2'",
+        	"separator": "u'\uE0BC'",
+        	"separator_thin": "u'\uE0BD'"
+  }
+}
+
